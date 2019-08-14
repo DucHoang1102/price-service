@@ -1,1 +1,2 @@
-require('Templates');
+require('./Group');
+require('./Price');

@@ -2,6 +2,7 @@ var routerIndex = require('express').Router();
 var routerGroup = require('express').Router();
 var priceController = require('../controllers/price');
 var groupController = require('../controllers/group');
+var checkController = require('../controllers/check');
 
 /*
  * api/prices
@@ -30,6 +31,11 @@ routerGroup.get('/groups/:id', groupController.details);
 routerGroup.put('/groups/:id', groupController.update);
 
 routerGroup.delete('/groups/:id', groupController.delete);
+
+/*
+ * api/check
+ */
+routerGroup.get('/check', checkController.check);
 
 /*
  * Entry point

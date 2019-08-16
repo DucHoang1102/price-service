@@ -3,9 +3,7 @@ var mongoose        = require('mongoose'),
 
 var GroupSchema = new mongoose.Schema({
     name       : { type: String, trim: true },
-    description: { type: String },
-    catalog    : { type: String },
-    active     : { type: Number, min: 0, max: 1, default: 1 }
+    description: { type: String }
 
 }, { timestamps: true } );
 

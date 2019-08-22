@@ -34,8 +34,8 @@ exports.view = function (req, res, next) {
 exports.new = function (req, res, next) {
     var price = new Price(req.body.price);
 
-    return price.save().then(result => {
-        res.json({
+    price.save().then(result => {
+        return res.json({
             prices: result
         });
 

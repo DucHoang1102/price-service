@@ -27,8 +27,8 @@ exports.view = function (req, res, next) {
 exports.new = function (req, res, next) {
     var group = new Group(req.body.group);
 
-    return group.save().then(result => {
-        res.json({
+    group.save().then(result => {
+        return res.json({
             groups: result
         });
 

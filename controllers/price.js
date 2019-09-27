@@ -69,6 +69,10 @@ exports.update = function (req, res, next) {
             price.regexp = req.body.price.regexp;
         }
 
+        if (typeof req.body.price.value !== 'undefined') {
+            price.value = req.body.price.value;
+        }
+
         if (typeof req.body.price.group !== 'undefined') {
             price.group = req.body.price.group;
         }

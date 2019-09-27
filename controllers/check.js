@@ -10,7 +10,6 @@ exports.check = async function(req, res, next) {
     if (req.body.price.idGroup) {
         prices = await Price.find({group: req.body.price.idGroup, active: 1}).sort({'layer': 'desc'}).exec();
     }
-
     // Case 2: Match with all prices
     else {
         prices = await Price.find({active: 1}).sort({'layer': 'desc'}).exec();
@@ -18,7 +17,8 @@ exports.check = async function(req, res, next) {
 
     for (let price of prices) {
         let regexp = new RegExp(price.regexp, 'i');
-        if (regexp.test(req.body.price.match)) {
+
+        if (price.regexp !== undefined && regexp.test(req.body.price.match)) {
             value = price.value;
             break;
         }

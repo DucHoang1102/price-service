@@ -8,7 +8,7 @@ var PriceSchema = new mongoose.Schema({
     value      : { type: Number, min: 0, default: 0 },
     layer      : { type: Number, min: 1, default: 1 },
     active     : { type: Number, min: 0, max: 1, default: 1 },
-    group      : { type: mongoose.Schema.Types.ObjectId }
+    group      : { type: mongoose.Schema.Types.ObjectId, required: true }
 
 }, { timestamps: true } );
 

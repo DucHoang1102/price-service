@@ -3,7 +3,8 @@ var routerGroup = require('express').Router();
 var priceController = require('../controllers/price');
 var groupController = require('../controllers/group');
 var checkController = require('../controllers/check');
-var nextController = require('../controllers/next');
+var nextController  = require('../controllers/next');
+var preController   = require('../controllers/pre');
 
 /*
  * api/prices
@@ -42,6 +43,11 @@ routerGroup.get('/check', checkController.check);
  * api/next
  */
 routerGroup.put('/next', nextController.next);
+
+/*
+ * api/pre
+ */
+routerGroup.put('/pre', preController.pre);
 
 /*
  * Entry point

@@ -73,14 +73,6 @@ exports.update = function (req, res, next) {
             price.value = req.body.price.value;
         }
 
-        if (typeof req.body.price.group !== 'undefined') {
-            price.group = req.body.price.group;
-        }
-
-        if (typeof req.body.price.layer !== 'undefined') {
-            price.layer = req.body.price.layer;
-        }
-
         if (typeof req.body.price.active !== 'undefined') {
             price.active = req.body.price.active;
         }

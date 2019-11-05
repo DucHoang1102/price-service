@@ -33,12 +33,17 @@ exports.view = function (req, res, next) {
 
 exports.new = function (req, res, next) {
     var price = new Price(req.body.price);
+    
+    Price.countDocuments({ group: req.body.price.group }).then(count => {
+        price.layer = count + 1;
+    
+        price.save().then(result => {
+            return res.json({
+                prices: result
+            });
 
-    price.save().then(result => {
-        return res.json({
-            prices: result
-        });
-
+        }).catch( err => res.json({ errors: err.message }) );
+        
     }).catch( err => res.json({ errors: err.message }) );
 };
 
@@ -88,11 +93,19 @@ exports.update = function (req, res, next) {
 };
 
 exports.delete = function (req, res, next) {
-    Price.findByIdAndRemove(req.params.id).then(result => {
-        if (!result) throw new Error('Price not found');
+    Price.findByIdAndRemove(req.params.id).then(price => {
+        if (!price) throw new Error('Price not found');
 
-        return res.json({
-            prices: result
+        // Reset layer
+        Price.find({group: price.group}).sort('layer').then(remainingPrices => {
+            for (let i = 0; i < remainingPrices.length; i++) {
+                remainingPrices[i].layer = i + 1;
+                remainingPrices[i].save();
+            }
+
+            return res.json({
+                prices: price
+            });
         });
 
     }).catch( err => res.json({ errors: err.message }) );
